@@ -1,0 +1,153 @@
+h2{
+    text-align: center;
+}
+.container{
+    margin:20px auto;
+    border:solid thin lightgray;
+    width:65%;
+}
+
+.menu{
+    box-sizing: border-box;
+    background-color: lightgray;
+    height: 50px;
+}
+
+span {
+    font-size: 26px;
+}
+
+.name{
+    margin:10px;
+    text-align: center;
+    width: 15%;
+    float:right;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.name2{ 
+    margin: 10px;
+    text-align: left;
+    cursor: pointer;
+    display: inline-block; 
+    width: calc(25% - 50px); 
+    overflow: hidden;
+}
+
+.images {
+    margin: 5px 5%;
+    width: 90%;
+    white-space: nowrap; 
+}
+
+.box_1 {
+    display: inline-block;
+    width: 25%;
+    margin: 0 0.2%;
+
+}
+
+.box_1.middle {
+    width: 50%; 
+}
+
+.box_1 img {
+    width: 100%;
+    height: 300px;
+}
+
+
+.info{
+    width:90%;
+    height: 380px;
+    box-sizing: border-box;
+    margin:20px auto;
+    display: inline-block;
+    margin:10px 5%;
+}
+
+.info__box{
+    display: inline-block;
+    box-sizing: border-box;
+    width: 49%; 
+    height: 100%;
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    text-align:center;
+    padding: 10px;
+    vertical-align: top;
+    margin: 0.5% ;
+    overflow: hidden;
+}
+
+.info__box.bord{
+    border:0;
+}
+
+.box-header {
+    height: 70px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.box-header-right {
+    height: 100%;
+    width: 49%;
+    float: right;
+    text-align: center;
+    overflow: hidden;
+}
+
+.box-header img {
+    height: 70px;
+    width: 22.5%;
+}
+
+.box-header-right h3{
+    margin-top: 0;
+    font-size: 18px;
+    text-align: left;
+}
+
+.box-header-right p{
+    line-height: 1.1;
+    text-align: justify;
+    margin-top: 0;
+}
+
+h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+p {
+    line-height: 1.5;
+    text-align: justify;
+    
+}
+
+.info__box__right{
+    display: block; 
+    height: 22%;
+    box-sizing: border-box;
+    margin-top:0px;
+    margin-bottom: 15px;
+    padding: 5px;
+    background-color: lightgrey;
+    overflow: hidden; 
+}
+
+.test__box__right__foto{
+    width:49%;
+    height: 100%;
+    display: block;
+    float: left;
+}
+
+.test__box__right__foto img{
+    float:left;
+    width: 100%;
+    height: 100%;
+}
