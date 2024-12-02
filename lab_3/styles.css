@@ -26,6 +26,10 @@ span {
     overflow: hidden;
 }
 
+.name.active{
+    color:red;
+}
+
 .name2{ 
     margin: 10px;
     text-align: left;
