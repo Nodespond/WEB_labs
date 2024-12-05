@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическое задание</title>
+    <style>
+        h3 {
+            text-align: center;
+        }
+
+        p {
+            display: flex;
+            justify-content: space-evenly;
+            width:70%;
+            margin: auto;
+        }
+
+        p a {
+            width: 200px;
+            padding: 10px;
+            margin:0 10px;
+            background-color: lightgrey;
+            color: #333;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        p > a:last-child{
+            background-color: lightgreen;
+        }
+
+        .content {
+            display: grid;
+            width: 90%;
+            height: 280px;
+            background-color: lightgreen;
+            margin:20px auto;
+            padding: 20px;
+            grid-row-gap:20px;
+            justify-content: space-evenly;
+            align-content: space-evenly;
+            grid-template-columns: repeat(3, 30%);
+            grid-template-rows: repeat(2, 50% 30%);
+            grid-template-areas: 
+                "t1 t2 t3"
+                "t4 t4 t4";
+        }
+
+        .topic{
+            padding: 20px;
+            text-align: justify;
+        }
+
+        .topic:nth-child(1){
+            grid-area: t1;
+            background-color: white;
+        }
+
+        .topic:nth-child(2){
+            grid-area: t2;
+            background-color: white;
+        }
+
+        .topic:nth-child(3){
+            grid-area: t3;
+            background-color: white;
+        }
+
+        .topic:nth-child(4){
+            grid-area: t4;
+            background-color: white;
+        }
+
+        .topic:nth-child(4) b{
+            background-color: lightgreen;
+        }
+
+        @media(max-width:800px){
+            p {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                grid-row-gap:10px;
+                grid-template-areas: 
+                "tt1 tt2"
+                "tt3 tt4";
+            }
+
+            p a:nth-child(1){
+                grid-area: tt1;
+            }
+
+            p a:nth-child(2){
+                grid-area: tt2;
+            }
+
+            p a:nth-child(3){
+                grid-area: tt3;
+            }
+
+            p a:nth-child(4){
+                grid-area: tt4;
+            }
+
+            .content {
+                grid-column-gap:10px;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-areas: 
+                "t1 t1"
+                "t2 t3"
+                "t4 t4";
+            }
+        }
+    </style>
+</head>
+<body>
+    <h3>Языки программирования</h3>
+    <p> 
+      <a href= "#"> Python</a> 
+      <a href= "#"> C</a> 
+      <a href= "#"> Java</a> 
+      <a href= "#"> JavaScript</a>
+   </p> 
+   <div  class= "content">  
+      <div class="topic"><b>Python</b> создан в 1989–1991 годах голландским  программистом  <a  href= "#" >  Гвидо ван Россумом</a> .</div> 
+      <div class= "topic"><b>C</b>  разработан в 1969–1973 годах сотрудником Bell Labs <a href= "#" > Деннисом Ритчи</a> .</div> 
+      <div class= "topic"><b>Java</b>  разработан в 1990–1996 годах канадским программистом  <a href =  "#" > Джеймсом Гослингом </a> .</div> 
+      <div  class= "topic"><b>JavaScript</b>  разработан в 1996 году, автор - американский программист <a href =  "#" >Брендан Айк</a> .</div> 
+   </div>
+
+
+</body>
+</html>
