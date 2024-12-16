@@ -6,6 +6,19 @@
         <title>Лабораторная работа Bootstrap</title> 
         <link href="css/bootstrap.min.css" rel="stylesheet"> 
         <script src="js/bootstrap.bundle.min.js"></script> 
+
+        <style>
+
+            .lead{
+                text-align: justify;
+            }
+
+            @media (max-width:600px){
+                .lead{
+                    font-size:1rem;
+                }
+    }
+        </style>
     </head> 
 <body> 
     <header> 
@@ -119,10 +132,10 @@
         </div> 
 
         <div class="row mt-5"> 
-            <div class="col-md-3 order-2 text-center"> 
+            <div class="col-md-3 order-md-2 order-1 text-center"> 
                 <img src="images/image10.jpg" class="d-block mx-auto" alt=""> 
             </div> 
-            <div class="col-md-9 order-1 text-center"> 
+            <div class="col-md-9 order-md-1 order-2 text-center"> 
                 <h2> 
                     Бурдж-Халифа,  <span class="text-muted">Дубай, ОАЭ</span> 
                   </h2> 
