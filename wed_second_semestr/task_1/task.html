@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="Изменить страницу" onClick="changePage('test')">
+        <h3 class="big">Языки программирования</h3>
+        <div class="small bold red center">Python</div>
+        <div class="big bold">C</div>
+        <div><a class="bold small" href="#">Java</a></div>
+        <h3 class="bold big">История создания</h3>
+        <div class="bold red">
+            <div>Python создан в 1989-1991.</div>
+            <div>C разработан в 1969-1973 годах.</div>
+            <div class="small bold" id="test">Java разработан в 1990-1996 годах.</div>
+            <div class="bold small">JavaScript разработан в 1996 году.</div>
+            <div class="big">Prolog разработан в 1972 году.</div>
+        </div>
+        <h3 class="bold small red">Разработчики</h3>
+        <script>
+            function changePage(elem){
+                let curr_elem = document.getElementById(elem);
+                if(!elem){
+                    alert("Элемент не найден");
+                    return;
+                }
+
+                let classes_elem = Array.from(curr_elem.classList);
+                let all_page = document.querySelectorAll('*');
+                let sortMass2 = classes_elem.sort();
+
+                all_page.forEach(element => {
+                    if(element === curr_elem){      //не удаляем сам элемент с id = test
+                        return;
+                    }
+
+                    let class_of_elem = Array.from(element.classList);
+                    if(class_of_elem.length === classes_elem.length){
+                        let sortMass1 = class_of_elem.sort();
+                        let is_okay = true;
+
+                        for(let i = 0; i < sortMass2.length;i++){
+                            if(sortMass1[i] !== sortMass2[i]){
+                                is_okay = false;
+                                break;
+                            }
+                        }
+
+                        if(is_okay){
+                            element.remove();
+                        }
+
+                    }
+                });
+            }
+        </script>
+</body>
+</html>

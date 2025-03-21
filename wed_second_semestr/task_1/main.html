@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        h2 {
+            text-align: center;
+        }
+        .fraction-input {
+        margin-bottom: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+        .error {
+            border: 1px solid red;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2>Калькулятор дробей</h2>
+
+    <form id="fractionForm">
+        <div>
+            <h3>Форма представления дробей:</h3>
+        </div>
+        <div>
+            <input type="radio" id="simpleFraction" name="fractionType" value="simple">
+            <label for="simpleFraction">Простые дроби</label><br><br>
+        </div>
+        <div>
+            <input type="radio" id="mixedFraction" name="fractionType" value="mixed" checked>
+            <label for="mixedFraction">Смешанные дроби</label><br><br>
+        </div>
+        <div>
+            <button type="button" id="showForm">Показать</button><br><br>
+        </div>
+
+        <div>
+            <h3>Введите дроби:</h3>
+        </div>
+
+        <div id="fractionInputs"></div>
+
+        <h3  id="operation_block">Выберите операции:</h3>
+        <div style="margin-bottom: 30px;">
+            <select id="operations" multiple>
+                <option value="Разность">Разность</option>
+                <option value="Произведение">Произведение</option>
+                <option value="Частное">Частное</option>
+            </select>
+        </div>
+
+        <div>
+            <button type="button" id="calculate">Вычислить</button>
+            <button type="button" id="clear">Очистить</button>
+        </div>
+        <h3>Результат:</h3>
+        <div id="results">
+</div>
+    </form>
+    <script>
+
+        
+
+        let showFormButton = document.getElementById('showForm');
+        let fractionInputsDiv = document.getElementById('fractionInputs');
+        let simpleFractionRadio = document.getElementById('simpleFraction');
+        let mixedFractionRadio = document.getElementById('mixedFraction');
+        let calculateButton = document.getElementById('calculate');
+        let operationsSelect = document.getElementById('operations');
+        let resultsDiv = document.getElementById('results');
+        let clearButton = document.getElementById('clear');
+        let operation_h3 = document.getElementById('operation_block');
+
+        fractionInputsDiv.innerHTML = createMixedFractionInputs();      //выводим поля смешанных дробей
+
+        function createSimpleFractionInputs() {                         //выводим простые поля ввода
+        resultsDiv.innerHTML = '';
+        let html = '';
+        for (let i = 1; i <= 2; i++) {
+            html += `
+                <div class="fraction-input">
+                    Дробь ${i}:   
+                    Числитель: <input type="number" id="numerator${i}" name="numerator${i}"> 
+                    Знаменатель: <input type="number" id="denominator${i}" name="denominator${i}">
+                </div>
+            `;
+        }
+        return html;
+    }
+
+    function createMixedFractionInputs() {                              //выводим смешанные поля ввода
+        let html = '';
+        resultsDiv.innerHTML = '';
+        for (let i = 1; i <= 2; i++) {
+            html += `
+                <div class="fraction-input">
+                    Дробь ${i}:   
+                    Целая часть: <input type="number" id="whole${i}" name="whole${i}">   
+                    Числитель: <input type="number" id="numerator${i}" name="numerator${i}"> 
+                    Знаменатель: <input type="number" id="denominator${i}" name="denominator${i}">
+                </div>
+            `;
+        }
+        return html;
+    }
+
+        showFormButton.addEventListener('click', function() {           //обрабатываем нажатие на кнопку "показать"
+            let inputsHTML = '';
+            if (simpleFractionRadio.checked) {
+                inputsHTML = createSimpleFractionInputs();
+            } else if (mixedFractionRadio.checked) {
+                inputsHTML = createMixedFractionInputs();
+            }
+            fractionInputsDiv.innerHTML = inputsHTML;
+        });
+
+        function getFractionValues(fractionType) {
+            let fraction1 = {};
+            let fraction2 = {};
+
+            if (fractionType === 'simple') {
+                fraction1.numerator = parseInt(document.getElementById('numerator1').value) || 0;
+                fraction1.denominator = parseInt(document.getElementById('denominator1').value) || 1;
+                fraction2.numerator = parseInt(document.getElementById('numerator2').value) || 0;
+                fraction2.denominator = parseInt(document.getElementById('denominator2').value) || 1;
+            } else {
+                fraction1.whole = parseInt(document.getElementById('whole1').value) || 0;
+                fraction1.numerator = parseInt(document.getElementById('numerator1').value) || 0;
+                fraction1.denominator = parseInt(document.getElementById('denominator1').value) || 1;
+                fraction2.whole = parseInt(document.getElementById('whole2').value) || 0;
+                fraction2.numerator = parseInt(document.getElementById('numerator2').value) || 0;
+                fraction2.denominator = parseInt(document.getElementById('denominator2').value) || 1;
+
+                fraction1.numerator = fraction1.whole * fraction1.denominator + fraction1.numerator;        //преобразуем числитель чтобы выделить целую часть
+                fraction2.numerator = fraction2.whole * fraction2.denominator + fraction2.numerator;
+            }
+
+            return { fraction1, fraction2 };
+        }
+
+        function calculateFractions(fractionType, operations) {
+            let { fraction1, fraction2 } = getFractionValues(fractionType);     //get input values
+            let resultsHTML = '';
+
+            operations.forEach(operation => {
+                let resultNumerator, resultDenominator;
+
+                switch (operation) {
+                    case 'Разность':
+                        resultNumerator = fraction1.numerator * fraction2.denominator - fraction2.numerator * fraction1.denominator;
+                        resultDenominator = fraction1.denominator * fraction2.denominator;
+                        break;
+                    case 'Произведение':
+                        resultNumerator = fraction1.numerator * fraction2.numerator;
+                        resultDenominator = fraction1.denominator * fraction2.denominator;
+                        break;
+                    case 'Частное':
+                        resultNumerator = fraction1.numerator * fraction2.denominator;
+                        resultDenominator = fraction1.denominator * fraction2.numerator;
+                        break;
+                    default:
+                        resultsHTML += `<p>Выбрана некорректная информация ${operation}</p>`;
+                        return;
+                }
+
+                let gcd = greatestCommonDivisor(resultNumerator, resultDenominator);
+                resultNumerator /= gcd;
+                resultDenominator /= gcd;       //приводим к несократимому виду
+
+                if (fractionType === 'mixed') {
+                    let wholePart = Math.floor(resultNumerator / resultDenominator);        //вычисляем целую часть дроби
+                    let remainingNumerator = resultNumerator % resultDenominator;           //остаток от деления - новый числитель
+
+                    if (wholePart === 0) {                                                  //если целая часть равна 0
+                        resultsHTML += `<p>${operation}: 0 ${remainingNumerator}/${resultDenominator}</p>`;
+                    } else {
+                        resultDenominator = Math.abs(resultDenominator);
+                        resultsHTML += `<p>${operation}: ${wholePart} ${remainingNumerator}/${resultDenominator}</p>`;
+                    }
+                } else {                                                                    //вывод для простой дроби
+                    resultsHTML += `<p>${operation}: ${resultNumerator}/${resultDenominator}</p>`;
+                }
+            });
+
+            return resultsHTML;
+        }
+
+        function greatestCommonDivisor(a, b) {                                              //НОД
+            return b === 0 ? a : greatestCommonDivisor(b, a % b);
+        }
+
+        clearButton.addEventListener('click', function() {                                  //кнопка очистить (обработчик)
+            if (simpleFractionRadio.checked) {
+                fractionInputsDiv.innerHTML = createSimpleFractionInputs();
+            } else if (mixedFractionRadio.checked) {
+                fractionInputsDiv.innerHTML = createMixedFractionInputs();
+            }
+            resultsDiv.innerHTML = ''; 
+         });
+
+         function validateInputs(fractionType) {                                            //проверка полей ввода
+            let isValid = true;
+
+            if (fractionType === 'simple') {
+                let numerator1 = document.getElementById('numerator1');
+                let denominator1 = document.getElementById('denominator1');
+                let numerator2 = document.getElementById('numerator2');
+                let denominator2 = document.getElementById('denominator2');
+
+                isValid = validateField(numerator1, false) && isValid;
+                isValid = validateField(denominator1, true) && isValid;
+                isValid = validateField(numerator2, false) && isValid;
+                isValid = validateField(denominator2, true) && isValid;
+            } else {
+                let whole1 = document.getElementById('whole1');
+                let numerator1 = document.getElementById('numerator1');
+                let denominator1 = document.getElementById('denominator1');
+                let whole2 = document.getElementById('whole2');
+                let numerator2 = document.getElementById('numerator2');
+                let denominator2 = document.getElementById('denominator2');
+
+                isValid = validateField(whole1, false) && isValid;
+                isValid = validateField(numerator1, false) && isValid;
+                isValid = validateField(denominator1, true) && isValid;
+                isValid = validateField(whole2, false) && isValid;
+                isValid = validateField(numerator2, false) && isValid;
+                isValid = validateField(denominator2, true) && isValid;
+            }
+
+            return isValid;
+        }
+
+        function validateField(field, isDenominator) {                                      //передаем также значение , явл-ся ли это знаменателем
+            const value = field.value;
+
+            if (!value || value.includes('.')) {                                            //проверка на точку
+                field.classList.add('error');
+                addInputEventListener(field);
+                return false;
+            }
+
+            const parsedValue = Number(value);
+
+            if (isNaN(parsedValue) || !Number.isInteger(parsedValue)) {                     //некорректное или не целое
+                field.classList.add('error');
+                addInputEventListener(field);
+                return false;
+            }
+
+            if (isDenominator && parsedValue === 0) {                                       //числитель = 0
+                field.classList.add('error');
+                addInputEventListener(field);
+                return false;
+            }
+
+            field.classList.remove('error');
+            return true;
+        }
+
+        function addInputEventListener(field) {                                             //для красной рамки красную рамку у поля ввода
+            const listener = function() {
+                field.classList.remove('error');
+                field.removeEventListener('input', listener);
+            };
+            field.addEventListener('input', listener);
+        }
+
+        calculateButton.addEventListener('click', function() {
+            const fractionType = simpleFractionRadio.checked ? 'simple' : 'mixed';
+            const selectedOperations = Array.from(operationsSelect.selectedOptions).map(option => option.value);
+
+            if (fractionInputsDiv.innerHTML === '') {
+                resultsDiv.innerHTML = '<p style="color: red;">Сначала отобразите форму ввода дробей.</p>';
+                return;
+            }
+
+            if (!validateInputs(fractionType)) {
+                resultsDiv.innerHTML = '<p>Пожалуйста, введите только целые числа во все поля ввода (знаменатель не должен быть равен нулю).</p>';
+                return;
+            }
+
+            if (selectedOperations.length === 0) {
+                resultsDiv.innerHTML = '<p style="color: red;">Пожалуйста, выберите хотя бы одну операцию.</p>';
+                operation_h3.innerHTML = '<p style="color: red;">Выберите операции:</p>'
+                return;
+            }
+
+            if (selectedOperations.includes('Частное')) {
+                let whole2, numerator2;
+
+                if (fractionType === 'simple') {
+                    numerator2 = parseInt(document.getElementById('numerator2').value) || 0;
+                } else {
+                    whole2 = parseInt(document.getElementById('whole2').value) || 0;
+                    numerator2 = parseInt(document.getElementById('numerator2').value) || 0;
+                }
+
+                if ((fractionType === 'mixed' && whole2 === 0 && numerator2 === 0) || (fractionType === 'simple' &&  numerator2 === 0 )) {
+                    numerator2Field = document.getElementById('numerator2');
+                    numerator2Field.classList.add('error');
+
+                    addInputEventListener(numerator2Field);
+
+                    resultsDiv.innerHTML = '<p style="color: red;">Вторая дробь равна нулю. На ноль делить нельзя.</p>';
+                    return;
+                }
+            }
+
+            const resultsHTML = calculateFractions(fractionType, selectedOperations);
+            operation_h3.innerHTML = '<p style="color: black;">Выберите операции:</p>'
+            resultsDiv.innerHTML = resultsHTML;
+        });
+
+    </script>
+</body>
+</html>
