@@ -34,7 +34,6 @@ code {
   margin: 0 auto; 
   text-align: center; 
   padding: 20px;
-  border: 1px solid #ccc; 
 }
 
 .main-title {
@@ -48,7 +47,6 @@ code {
 .content-container {
   width: 100%; 
   margin: 0 auto; 
-  border: 1px dashed #999; 
   display: flex;
   justify-content: center;
 }
@@ -56,7 +54,6 @@ code {
 .left-block,
 .right-block {
   width: 40%;
-  border: 1px dotted #666; 
   box-sizing: border-box; 
 }
 
@@ -83,8 +80,7 @@ code {
   width: 10%;
   display: flex;
   justify-content:center; 
-  align-items:center; 
-  border: 1px dashed #999; 
+  align-items:center;
   
 }
 
