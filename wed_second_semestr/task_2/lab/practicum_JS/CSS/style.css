@@ -1,0 +1,40 @@
+
+table {
+    width: 80%; 
+    margin: 20px auto; 
+    border-collapse: collapse; 
+}
+
+th, td {
+    padding: 8px; 
+    text-align: center; 
+    border: 2px solid #e7e1e0; 
+    font-size: 18px;
+}
+
+th {
+    background-color: #b2afae; 
+    color: black;
+    font-weight: bold; 
+}
+
+td {
+    background-color: #eee; 
+}
+
+.filter-sort-container {
+    display: flex;
+    justify-content: flex-start; /*выравнивания по левому краю */
+    align-items: flex-start; /*Выравнивание по верхней границе*/
+  }
+  
+  .filter-section {
+    width: 45%; /*5% ширины*/
+    margin-right: 20px; /*Отступ*/
+  }
+  
+  .sort-section {
+    width: 45%; /*45% ширины*/
+  }
+
+  
