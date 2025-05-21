@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="JavaScript/data.js"></script>
+    <script src="JavaScript/table.js"></script>
+    <script src="JavaScript/main.js"></script>
+    <script src="JavaScript/filter.js"></script>
+    <script src="JavaScript/sort.js"></script>
+    <title>Document</title>
+</head>
+<body>
+        <hr size="5" color="grey">
+        <h1 align="center">Меню страницы</h1>
+        <ul type="circle">
+            <li><a href="main.html"><font size="5">Топ 5 аниме</font></a></li>
+            <li><a href="table.html"><font size="5">Самые просматриваемые аниме из топа</font></a></li>
+        </ul>
+        <hr size="5" color="grey">
+
+       <details>
+        <summary>График</summary>
+        <table cellpadding="10">
+            <tr>
+            <td>
+            <form>
+                <strong>Значения по оси OX</strong>
+                <br>
+                <input type="radio" name="anitype" value="first">Тип Аниме<br>
+                <input type="radio" name="country" value="second">Страна<br>
+                <input type="radio" name="year" value="third">Год<br>
+                
+            </form>
+            </td>
+            <td>
+            <form>
+                <strong>Результат</strong>
+                <br>
+                <input type="checkbox" name="result" value="0"> Максимальное число серий <br>
+                <input type="checkbox" name="result" value="1"> Минимальное число серий <br>
+                <input type="checkbox" name="result" value="2"> Количество серий <br>
+            </form>
+            </td>
+            </tr>
+        </table>
+        <input type="button" value="Построить">
+        <p>Здесь будет график</p>
+        
+       </details>
+
+       <details>
+        <summary>Фильтр</summary>
+        <form id="filter">
+            <p>
+            <label for="structure">Название:</label>
+            <input type="text" id="structure"><br>
+            </p>
+            <p>
+            <label for="category">Тип:</label>
+            <input type="text" id="category"><br>
+            </p>
+            <p>
+            <label for="country">Страна:</label>
+            <input type="text" id="country"><br>
+            </p>
+            <p>
+            <label for="yearFrom">Год выпуска: </label>
+            от <input type="number" min="1900" max="2024" id="yearFrom"> до 
+            <input type="number" min="1900" max="2024" id="yearTo"><br>
+            </p>
+            <p>
+            <label for="heightFrom">Количество серий:</label>
+            от <input type="number" min="1" max="1500" id="heightFrom"> до 
+            <input type="number" min="1" max="1500" id="heightTo"><br>
+            </p>
+            <input type="button" value="Найти">
+            <input type="button" value="Очистить фильтры"> 
+        </form>
+       </details>
+
+       <details>
+        <summary>Сортировка</summary>
+        <form id="sort">
+            <p> Сортировать по</p>
+            <p>
+              <select id="fieldsFirst">
+              </select> 
+              по убыванию? <input  type="checkbox"  id="fieldsFirstDesc">
+            </p>
+            <p> 
+              <select id="fieldsSecond">
+              </select> 
+              по убыванию? <input  type="checkbox"  id="fieldsSecondDesc">
+            </p>
+            <p> 
+                <select id="fieldsThird">
+                </select> 
+                по убыванию? <input  type="checkbox"  id="fieldsThirdDesc">
+              </p>
+            <input type="button" value="Сортировать"> 
+            <input type="button" value="Сбросить сортировку">
+          </form>   
+       </details>
+
+        <table id="list">
+
+        </table>
+</body>
+</html>
