@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title> Индивидуальное задание</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="node_modules/d3/dist/d3.min.js"></script>
+    <script src="JavaScript/main.js"></script>
+    <script src="JavaScript/image.js"></script>
+    <script src="JavaScript/path.js"></script>
+  </head>
+  
+  <body>   
+
+    <form id="setting">
+       
+        <p id="wayTypes" >
+          <b>Пути перемещения:</b><br>
+          <select id="way_type">
+            <option value="0">Буквой "Г"</option>
+            <option value="1">Про кругу</option>
+            <option value="2">Параметрическая кривая</option>
+          </select>
+        </p>
+
+        <p>
+          <b>Масштаб</b><br>
+          <label for="scaleX">по X: </label>
+          <input type="number" id="scaleX" value="1" min="0.1" step="0.1">
+          <label id="scaleX_for" for="scaleX_finish" >до </label>
+          <input type="number" id="scaleX_finish" value="1.5" min="0.1" step="0.1" >
+          <br>
+          <label for="scaleY">по Y: </label>
+          <input type="number" id="scaleY" value="1" min="0.1" step="0.1">
+          <label id="scaleY_for" for="scaleY_finish" >до </label>
+          <input type="number" id="scaleY_finish" value="1.5" min="0.1" step="0.1" >
+        </p>
+        <p>
+          <b>Поворот</b><br>
+          <label for="rotate">угол: </label>
+          <input type="number" id="rotate" value="0" min="0" max="360">
+          <label id="rotate_for" for="rotate_finish" >до </label>
+          <input type="number" id="rotate_finish" value="180" min="0" max="360" >
+        </p>
+        <p>
+          <b>Время анимации</b><br>
+          <label for="time">мс </label>
+          <input type="number" id="time" value="0" min="0" max="10000">
+
+        </p>
+        <br>
+    
+    </form>
+
+    <p>
+      <input type="button" id="clearButton" value="Очистить">
+    </p>
+
+    <div id="animation-container">
+      <b>Тип Анимации</b>
+      <div>
+        <select id="animationType">
+          <option value="easeLinear">линейная</option>
+          <option value="easeBounce">прыгающая</option>
+          <option value="easeElastic">эластичная</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="animation-controls">
+      <button id="animateButton">Анимировать</button>
+    </div>
+
+    <svg></svg>
+
+  </body>
+</html>

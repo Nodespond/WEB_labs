@@ -1,0 +1,14 @@
+#setting {
+    display: flex;          
+    flex-wrap: nowrap;      
+    gap: 20px;              
+    align-items: flex-start; 
+  }
+
+#animationType , #animation-controls {
+    display: none;
+}
+
+#animation-container {
+    display: flex;
+}
