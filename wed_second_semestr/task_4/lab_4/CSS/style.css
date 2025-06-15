@@ -1,0 +1,35 @@
+table {
+    width: 80%; 
+    margin: 20px auto; 
+    border-collapse: collapse; 
+}
+
+th, td {
+    padding: 8px; 
+    text-align: center; 
+    border: 2px solid #e7e1e0; 
+    font-size: 18px;
+}
+
+th {
+    background-color: #b2afae; 
+    color: black;
+    font-weight: bold; 
+}
+
+td {
+    background-color: #eee; 
+}
+
+svg {
+    width: 800px;
+    height: 400px;
+}
+svg text {
+    font: 8px Verdana;
+}
+svg path, line {
+    fill: none;
+    stroke: #333333;
+    width: 1px;
+}

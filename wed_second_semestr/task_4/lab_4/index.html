@@ -1,0 +1,48 @@
+<!DOCTYPE html> 
+<html lang="ru"> 
+<head> 
+  <meta charset="utf-8"> 
+  <title>Визуализация данных</title> 
+  <link rel="stylesheet" href="CSS/style.css"> 
+  <script src="node_modules/d3/dist/d3.min.js"> </script> 
+  <script src="JavaScript/data.js"></script> 
+  <script src="JavaScript/main.js"></script> 
+  <script src="JavaScript/table.js"></script> 
+  <script src="JavaScript/chart.js"></script>
+</head> 
+<body>    
+
+  <h3>Список самых высоких зданий</h3> 
+
+  <div class="controls">
+    <label>Значения по оси ОХ:</label><br><br>
+    <input type="radio" id="ox-country" name="x-axis" value="Страна" checked>
+    <label for="ox-country">Страна</label><br>
+    <input type="radio" id="ox-year" name="x-axis" value="Год">
+    <label for="ox-year">Год</label><br><br>
+    
+    <label>Значения по оси OY:</label><br><br>
+    <div>
+        <input type="checkbox" id="y-min" >
+        <label for="y-min">Минимальная высота</label>
+    </div>
+    <div>
+        <input type="checkbox" id="y-max" checked>
+        <label for="y-max">Максимальная высота</label>
+    </div><br><br>
+    
+    <label>Тип графика:</label>
+    <select id="chartType">
+        <option value="scatter">Точечная диаграмма</option>
+        <option value="gist">Гистограмма</option>
+    </select><br><br>
+    
+    <button id="updateGraph">Построить</button>
+</div>
+
+  <svg></svg>
+  <button id="toggleTable">Скрыть таблицу</button>
+  <table id="build"> </table> 
+  
+</body> 
+</html> 
