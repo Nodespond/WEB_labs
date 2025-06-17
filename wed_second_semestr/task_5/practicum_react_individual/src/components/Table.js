@@ -2,39 +2,46 @@ import TableHead from './TableHead.js';
 import TableBody from './TableBody.js';
 import Filter from './Filter.js';
 import Sort from './Sort.js';
-import { useState } from 'react';
+import { useState} from 'react';
 
 const Table = (props) => {
     const [activePage, setActivePage] = useState("1");
     const [dataTable, setDataTable] = useState(props.data);
-    
+    //состояния для сброса форм 
     const [resetTrigger, setResetTrigger] = useState(false);
 
+
+    //при обновлении таблицы сброс
     const updateDataTable = (value) => {
         setDataTable(value);
         setActivePage("1"); //при фильтрации на 1 страницу
+
+        //если длина данных равна длине отсортированных - то сброс фильтра
         if (value.length === props.data.length)
-            setResetTrigger(prev => !prev); //сброс сортировки
+        setResetTrigger(prev => !prev); //сброс сортировки
     };
 
     //функция сортировки
     const handleSort = (sortOptions) => {
+        //копируем данные для сортировки
         const sortedData = [...dataTable].sort((a, b) => {
+            //идем по параметрам сортировки
             for (const option of sortOptions) {
                 const { field, order } = option;
                 let compareResult = 0;
                 
+                //сравниваем числа
                 if (field === "Год выпуска" || field === "Количество серий") {
                     //числа
                     compareResult = a[field] - b[field];
                 } else {
-                    //строки
+                    //строки сравниваем
                     const valA = String(a[field]).toLowerCase();
                     const valB = String(b[field]).toLowerCase();
-                    compareResult = valA.localeCompare(valB);
+                    compareResult = valA.localeCompare(valB); //сравнивает  и выдает результат
                 }
                 
-                if (compareResult !== 0) {
+                if (compareResult !== 0) {  //возвращаем результат
                     return order ? -compareResult : compareResult;
                 }
             }
@@ -43,7 +50,7 @@ const Table = (props) => {
         
         setDataTable(sortedData);
     };
-
+    //если явно сбросили сортировку - то тоже чистим
     const handleResetSort = () => {
         setDataTable(props.data);
         setActivePage("1");
@@ -75,8 +82,8 @@ const Table = (props) => {
 
         <Filter filtering={updateDataTable} 
                 data={dataTable} 
-                fullData={props.data}
-                resetTrigger={resetTrigger}/>
+                fullData={props.data} //триггер передаем в компоненты
+                resetTrigger={resetTrigger}/>       
         
         <Sort 
             columns={Object.keys(props.data[0])} 
@@ -94,12 +101,11 @@ const Table = (props) => {
             />
         </table>
 
-        {props.showPagination && dataTable.length > 0 && (
+        {props.showPagination && n > 1 && (
             <div className="pagination">
                 {pages}
             </div>
         )}
-        {dataTable.length === 0 && <p>Нет данных, соответствующих фильтрам</p>}
         </>   
     )   
 }

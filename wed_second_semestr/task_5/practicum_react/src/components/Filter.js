@@ -1,43 +1,45 @@
 const Filter = (props) => {
+  //отправка отправки формы
     const handleSubmit = (event) => {        
-        event.preventDefault();        
+        event.preventDefault();        //отмена перезагрузки страницы
 
         const filterField = {
-            "Название": event.target["structure"].value.toLowerCase(),
+            "Название": event.target["structure"].value.toLowerCase(),  //достаем значения из формы
             "Тип": event.target["type"].value.toLowerCase(),
             "Страна": event.target["country"].value.toLowerCase(),
             "Город": event.target["city"].value.toLowerCase(),
             "Год": [
                 event.target["year_min"].value || 0,
-                event.target["year_max"].value || Infinity
+                event.target["year_max"].value || 2100
             ],
             "Высота": [
                 event.target["height_min"].value || 0,
-                event.target["height_max"].value || Infinity
+                event.target["height_max"].value || 10000
             ]
         };
-            
+            //начинаем с исх.данных
         let arr = props.fullData;
+        //фильтруем последовательно
         for(const key in filterField) {
-            if (Array.isArray(filterField[key])) {
+            if (Array.isArray(filterField[key])) {    //если значение массив
                 //фильтруем по числовым полям
                 const [min, max] = filterField[key];
                 arr = arr.filter(item => 
-                    item[key] >= Number(min) && item[key] <= Number(max)
+                    item[key] >= Number(min) && item[key] <= Number(max)  //по диапазону
                 );
             } else {
                 //фильтруем по строковым полям
                 arr = arr.filter(item => 
-                    item[key].toLowerCase().includes(filterField[key])
+                    item[key].toLowerCase().includes(filterField[key])  //ищем по строке
                 );
             }
         }  
-                
+                //передаем отфильтрованные данные
         props.filtering(arr);
     }
-
+    //сброс фильтра
     const handleReset = () => {
-        props.filtering(props.fullData);
+        props.filtering(props.fullData); //передаем просто все данные исходные
     }
 
     return (

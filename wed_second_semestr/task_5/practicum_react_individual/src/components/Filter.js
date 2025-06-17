@@ -10,11 +10,11 @@ const Filter = (props) => {
             "Страна": event.target["country"].value.toLowerCase(),
             "Год выпуска": [
                 event.target["year_min"].value || 0,
-                event.target["year_max"].value || Infinity
+                event.target["year_max"].value || 2100
             ],
             "Количество серий": [
                 event.target["height_min"].value || 0,
-                event.target["height_max"].value || Infinity
+                event.target["height_max"].value || 10000
             ]
         };
             
@@ -41,9 +41,9 @@ const Filter = (props) => {
         props.filtering(props.fullData);
     }
 
-    useEffect(() => {
+    useEffect(() => {   //отслеживаем изменение триггера и сбрасываем фильтрацию
       if (props.resetTrigger) {
-        document.querySelector('form').reset();
+        document.querySelector('form').reset();   //находим форму 1 ичистим
       }
     }, [props.resetTrigger]);
 
