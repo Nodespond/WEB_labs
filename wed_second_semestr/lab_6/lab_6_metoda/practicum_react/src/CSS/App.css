@@ -1,0 +1,71 @@
+table {
+  width: 80%; 
+  margin: 20px auto; 
+  border-collapse: collapse; 
+}
+
+th, td {
+  padding: 8px; 
+  text-align: center; 
+  border: 2px solid #e7e1e0; 
+  font-size: 18px;
+}
+
+th {
+  background-color: #b2afae; 
+  color: black;
+  font-weight: bold; 
+}
+
+td {
+  background-color: #eee; 
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pagination span {
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.pagination span:hover {
+  transform: scale(2);
+}
+
+.pagination .current-page {
+  color: #1a73e8;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/*стили строк*/
+.hide {
+  display: none;
+}
+
+.show {
+  display: table-row;
+}
+
+/*svg element styles*/
+svg {
+  width: 800px;
+  height: 400px;
+}
+
+svg path, line {
+  fill: none;
+  stroke: black;
+  width: 1px;
+}
+
+svg text {
+  font: 8px Verdana;
+}
